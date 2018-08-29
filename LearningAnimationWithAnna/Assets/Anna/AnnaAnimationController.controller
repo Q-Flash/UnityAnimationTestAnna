@@ -364,7 +364,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Boxing_Idle
+  m_Name: Idle_Combat
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -402,10 +402,10 @@ AnimatorStateMachine:
     m_Position: {x: 48, y: -180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102128466997195292}
-    m_Position: {x: 48, y: -60, z: 0}
+    m_Position: {x: -120, y: -84, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102149213780113244}
-    m_Position: {x: 276, y: -60, z: 0}
+    m_Position: {x: -120, y: -12, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

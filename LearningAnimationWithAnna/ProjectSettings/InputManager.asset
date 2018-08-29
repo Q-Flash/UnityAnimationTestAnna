@@ -297,15 +297,15 @@ InputManager:
     m_Name: Kick
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: m
+    negativeButton: mouse 1
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: joystick button 1
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
     snap: 0
-    invert: 0
+    invert: 1
     type: 0
     axis: 0
     joyNum: 0
