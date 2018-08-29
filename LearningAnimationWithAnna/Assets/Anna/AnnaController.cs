@@ -14,6 +14,7 @@ public class AnnaController : MonoBehaviour {
 	private float kickCastDuration = 1.833F; //Cast time for kick skill
 	private float jabCastDuration = 0.833F;
 	private float punchCastDuration = 1.867F;
+	private float backflipCastDuration = 2.033F;
 
 	// Use this for initialization
 	void Start () {
@@ -48,22 +49,30 @@ public class AnnaController : MonoBehaviour {
 		//Setting trigger for jumping when spacebar is pressed
 		if (Input.GetButtonDown ("Jump")) {
 			if (isCasting) {
-				
-				
+
 			} else {
-				anim.SetTrigger("isJumping");
+				if (Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.DownArrow)) {
+					doBackFlip ();
+				} else {
+					anim.SetTrigger ("isJumping");
+				}
 			}
-		
-			
 		}
 
+
+		/*
+		//Epic Backflip
+		if ( translation < 0 && Input.GetButtonDown ("Jump")) {
+			doBackFlip ();
+		}
+		*/
 		//Roundhouse kick to the face
-		if(Input.GetButtonDown("Kick")){
+		if (Input.GetButtonDown ("Kick")) {
 			if (isCasting) {
 				
 				
 			} else {
-				anim.SetTrigger("isKicking");
+				anim.SetTrigger ("isKicking");
 				isCasting = true; 
 				castingTimeout = kickCastDuration;
 			}
@@ -71,20 +80,23 @@ public class AnnaController : MonoBehaviour {
 		}
 
 		//Punching time
-		if(Input.GetButtonDown("Punch")){
+		if (Input.GetButtonDown ("Punch")) {
 			if (isCasting) {
-				if(anim.GetCurrentAnimatorStateInfo(0).IsName("First Jab")){
-					anim.SetTrigger("isPunching");
+				if (anim.GetCurrentAnimatorStateInfo (0).IsName ("First Jab")) {
+					//Fix condition for double proc on first punch
+					anim.SetTrigger ("isPunching");
 					castingTimeout += punchCastDuration;
 				}	
 				
 			} else {
-				anim.SetTrigger("isPunching");
+				anim.SetTrigger ("isPunching");
 				isCasting = true; 
 				castingTimeout = jabCastDuration;
 			}
 		}
 		
+
+
 
 		//Set running animation when character is running
 		if(translation != 0){
@@ -93,5 +105,11 @@ public class AnnaController : MonoBehaviour {
 		else{
 			anim.SetBool("isRunning", false);
 		}
+	}
+
+	void doBackFlip (){
+		anim.SetTrigger ("isBackFlipping");
+		isCasting = true; 
+		castingTimeout = backflipCastDuration;
 	}
 }
