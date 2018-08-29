@@ -6,13 +6,14 @@ public class AnnaController : MonoBehaviour {
 
 	static Animator anim;
 	private bool isCasting = false; //Bool to signal when a skill is being casted
-	private float castingTimeout = 0.00F; //How much time is left for cast duration of current skill
+	private float castingTimeout = 0.000F; //How much time is left for cast duration of current skill
 	public float speed = 10.0F; //Running speed
 	public float rotationSpeed = 100.0F; //Turn speed
 
 	//Skill cast times
 	private float kickCastDuration = 1.833F; //Cast time for kick skill
-
+	private float jabCastDuration = 0.833F;
+	private float punchCastDuration = 1.867F;
 
 	// Use this for initialization
 	void Start () {
@@ -23,11 +24,10 @@ public class AnnaController : MonoBehaviour {
 	void Update ()
 	{
 		//Update skill cast durations
-		if (castingTimeout > 0.00F) {
+		if (castingTimeout > 0.000F) {
 			castingTimeout -= Time.deltaTime;
 		} else {
 			isCasting = false;
-			castingTimeout = 0.00F;
 		}	
 
 
@@ -57,7 +57,7 @@ public class AnnaController : MonoBehaviour {
 			
 		}
 
-		//Kick when M is pressed
+		//Roundhouse kick to the face
 		if(Input.GetButtonDown("Kick")){
 			if (isCasting) {
 				
@@ -69,6 +69,22 @@ public class AnnaController : MonoBehaviour {
 			}
 			
 		}
+
+		//Punching time
+		if(Input.GetButtonDown("Punch")){
+			if (isCasting) {
+				if(anim.GetCurrentAnimatorStateInfo(0).IsName("First Jab")){
+					anim.SetTrigger("isPunching");
+					castingTimeout += punchCastDuration;
+				}	
+				
+			} else {
+				anim.SetTrigger("isPunching");
+				isCasting = true; 
+				castingTimeout = jabCastDuration;
+			}
+		}
+		
 
 		//Set running animation when character is running
 		if(translation != 0){
