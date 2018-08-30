@@ -83,9 +83,12 @@ public class AnnaController : MonoBehaviour {
 		if (Input.GetButtonDown ("Punch")) {
 			if (isCasting) {
 				if (anim.GetCurrentAnimatorStateInfo (0).IsName ("First Jab")) {
-					//Fix condition for double proc on first punch
-					anim.SetTrigger ("isPunching");
-					castingTimeout += punchCastDuration;
+					//If we already cast second punch, do not add to timer
+					if(!anim.GetBool("isSecondPunching")){
+						castingTimeout += punchCastDuration;
+					}
+
+					anim.SetTrigger ("isSecondPunching");
 				}	
 				
 			} else {
