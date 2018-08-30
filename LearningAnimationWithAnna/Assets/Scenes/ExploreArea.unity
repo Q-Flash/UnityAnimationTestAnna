@@ -112,7 +112,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 4838586ec0d94bf4cad09a631e8ab1fe, type: 2}
 --- !u!1 &43669131
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,12 +189,13 @@ GameObject:
   - component: {fileID: 55273298}
   - component: {fileID: 55273297}
   - component: {fileID: 55273296}
+  - component: {fileID: 55273299}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!154 &55273296
 TerrainCollider:
@@ -251,6 +252,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &55273299
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 55273295}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
 --- !u!1 &82273506 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 2204766eb12a5e54db1079488a80f16d,
@@ -269,16 +284,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   rotationSpeed: 100
---- !u!154 &82273508
-TerrainCollider:
+--- !u!195 &82273508
+NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 82273506}
-  m_Material: {fileID: 0}
   m_Enabled: 1
-  m_TerrainData: {fileID: 0}
-  m_EnableTreeColliders: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!4 &82273509 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 2204766eb12a5e54db1079488a80f16d,
@@ -309,9 +335,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.422702
-  m_Height: 2.8403442
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0.7211304, y: 0.47212315, z: 0.4480484}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &255743479
 Prefab:
   m_ObjectHideFlags: 0
