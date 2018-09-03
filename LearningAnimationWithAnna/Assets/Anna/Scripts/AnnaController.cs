@@ -5,6 +5,13 @@ using UnityEngine;
 public class AnnaController : MonoBehaviour {
 
 	static Animator anim;
+	private CharacterController controller;
+	
+	//Variables for movement
+	private float verticalVelocity;
+	private float gravity = 14.0F;
+	private float jumpForce = 10.0F;
+	
 	private bool isCasting = false; //Bool to signal when a skill is being casted
 	private float castingTimeout = 0.000F; //How much time is left for cast duration of current skill
 	public float speed = 10.0F; //Running speed
@@ -18,7 +25,8 @@ public class AnnaController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		anim = GetComponent<Animator>();
+		anim = GetComponent<Animator> ();
+		controller = GetComponent<CharacterController>();
 	}
 	
 	// Update is called once per frame
@@ -30,8 +38,31 @@ public class AnnaController : MonoBehaviour {
 		} else {
 			isCasting = false;
 		}	
+	
+		//Character movement
+		if (controller.isGrounded) {
+			verticalVelocity = -gravity * Time.deltaTime;
+
+			if (Input.GetKeyDown (KeyCode.Space)) {
+				verticalVelocity = jumpForce;
+			}
+		} else {
+			verticalVelocity -= gravity * Time.deltaTime;
+		}	
+
+		Vector3 moveVector = Vector3.zero;
+		//float rotation = 0;
+		//rotation = Input.GetAxis ("Horizontal") * rotationSpeed;
+		//rotation *= Time.deltaTime;
+		moveVector.x = Input.GetAxis("Horizontal")*speed;
+		moveVector.y = verticalVelocity;
+		moveVector.z = Input.GetAxis("Vertical")*speed;
+
+		//transform.Rotate (0, rotation, 0);
+		controller.Move(moveVector*Time.deltaTime);
 
 
+/*
 		//Movement with arrow-keys/WASD
 		float translation = 0;
 		float rotation = 0;
@@ -44,7 +75,7 @@ public class AnnaController : MonoBehaviour {
 			transform.Translate (0, 0, translation);
 			transform.Rotate (0, rotation, 0);
 		}
-
+*/
 
 		//Setting trigger for jumping when spacebar is pressed
 		if (Input.GetButtonDown ("Jump")) {
@@ -102,12 +133,13 @@ public class AnnaController : MonoBehaviour {
 
 
 		//Set running animation when character is running
-		if(translation != 0){
+		if((moveVector.x != 0) || (moveVector.z != 0)){
 			anim.SetBool("isRunning", true);
 		}
 		else{
 			anim.SetBool("isRunning", false);
 		}
+
 	}
 
 	void doBackFlip (){
@@ -115,4 +147,5 @@ public class AnnaController : MonoBehaviour {
 		isCasting = true; 
 		castingTimeout = backflipCastDuration;
 	}
+
 }
